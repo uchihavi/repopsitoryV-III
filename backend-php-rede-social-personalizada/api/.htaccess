@@ -1,0 +1,11 @@
+# backend/api/.htaccess
+Options -Indexes
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Headers "Authorization, Content-Type, X-Requested-With"
+  Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+</IfModule>
+<IfModule mod_php7.c>
+  php_value upload_max_filesize 20M
+  php_value post_max_size 24M
+</IfModule>
