@@ -1,5 +1,5 @@
 // src/utils/api.js
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api'
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost/repopsitoryV-III/backend-php-rede-social-personalizada/api/'
 
 export function getToken() {
   try { return localStorage.getItem('token') || '' } catch { return '' }

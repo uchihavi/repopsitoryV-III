@@ -1,6 +1,10 @@
 # backend/api/.htaccess
 Options -Indexes
 <IfModule mod_headers.c>
+
+  # substitua example.com pelo domínio permitido
+  Header set Content-Security-Policy "default-src 'self'; frame-ancestors 'self' http://localhost:5173/"
+
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Headers "Authorization, Content-Type, X-Requested-With"
   Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"

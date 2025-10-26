@@ -83,12 +83,18 @@ export default function Register(){
       return
     }
 
-    const res = await registerApi(form)
-    if (res?.success) {
-      setOk('Conta criada com sucesso.')
-      setTimeout(() => nav('/login'), 800)
-    } else {
-      setErr('Falha ao criar conta.')
+    const payload = { ...form, dob: normalizeDob(form.dob) }
+
+    try {
+      const res = await registerApi(payload)
+      if (res?.success) {
+        setOk('Conta criada com sucesso.')
+        setTimeout(() => nav('/login'), 800)
+      } else {
+        setErr(res?.message || 'Falha ao criar conta.')
+      }
+    } catch (error) {
+      setErr(error?.data?.message || error.message || 'Falha ao criar conta.')
     }
   }
 
@@ -302,4 +308,11 @@ const inputStyle = {
   outline:'none',
   background:'#fff',
   color:'#111'
+}
+
+function normalizeDob(dob) {
+  const match = dob.match(/^(\d{2})\/(\d{2})\/(\d{4})$/)
+  if (!match) return dob
+  const [, day, month, year] = match
+  return `${year}-${month}-${day}`
 }
