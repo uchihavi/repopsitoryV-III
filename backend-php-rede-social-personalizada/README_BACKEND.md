@@ -9,11 +9,13 @@
    - `C:\xampp\htdocs\rede-social-personalizada\backend` (Windows)
 2. Crie o banco e tabelas:
    - Abra o phpMyAdmin e execute o conteúdo de `backend/social_network.sql`.
+   - Os scripts PHP também verificam e criam/atualizam as tabelas essenciais (`users`, `posts`, etc.) ao conectar, corrigindo colunas ausentes como `password_hash` automaticamente.
 3. Configure envs (opcional) via variáveis de ambiente ou edite `api/db.php`:
    - `DB_HOST` (padrão `127.0.0.1`)
    - `DB_NAME` (padrão `rede_social`)
    - `DB_USER` (padrão `root`)
    - `DB_PASS` (padrão vazio)
+   - `DB_DSN` (opcional) para usar outro driver PDO — ex.: `sqlite:/path/social.db` para testes rápidos.
    - Ajuste `JWT_SECRET` em `api/jwt.php` para um valor forte.
 4. Inicie Apache + MySQL no XAMPP.
 5. **Frontend**: defina `VITE_API_BASE` ou use o proxy do `vite.config.js` apontando para `http://localhost/rede-social-personalizada/backend/api` (ou porta configurada).

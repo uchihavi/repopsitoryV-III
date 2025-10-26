@@ -1,5 +1,12 @@
 // src/utils/api.js
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost/repopsitoryV-III/backend-php-rede-social-personalizada/api/'
+const rawBase = import.meta.env.VITE_API_BASE
+const API_BASE = (rawBase && rawBase.trim() !== '' ? rawBase : '/api').replace(/\/+$/, '')
+
+function buildUrl(path) {
+  if (!path) return API_BASE
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  return `${API_BASE}${normalizedPath}`
+}
 
 export function getToken() {
   try { return localStorage.getItem('token') || '' } catch { return '' }
@@ -14,7 +21,7 @@ export async function request(
   { method = 'GET', body, headers = {}, withCredentials = false, csrfToken } = {}
 ) {
   const token = getToken()
-  const res = await fetch(`${API_BASE}${path}`, {
+  const res = await fetch(buildUrl(path), {
     method,
     headers: {
       'Content-Type': 'application/json',

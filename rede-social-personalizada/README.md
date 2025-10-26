@@ -11,7 +11,7 @@ Inclui:
 
 ## Uso
 1. Copie os arquivos deste pacote para o seu projeto (mantendo as pastas).
-2. `cp .env.example .env` e ajuste `VITE_API_BASE` (ex.: `http://localhost:8000/api`).
+2. `cp .env.example .env` e ajuste `VITE_API_BASE` (ex.: `http://localhost:8000` quando rodar `php -S` dentro da pasta `backend-php-rede-social-personalizada/api` ou `http://localhost/rede-social-personalizada/backend/api` em ambientes Apache/XAMPP). Caso essa variável não esteja definida, o frontend usa `/api` como base e depende do proxy configurado no `vite.config.js`.
 3. Instale: `npm i dompurify`
 4. Ajuste os endpoints de `src/utils/api.js` conforme suas rotas PHP.
 5. Confirme que existem as páginas:

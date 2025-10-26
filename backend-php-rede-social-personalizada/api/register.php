@@ -27,8 +27,9 @@ try {
   if ($stmt->fetch()) respond([ "success"=>false, "message"=>"E-mail já registrado" ], 409);
 
   $hash = password_hash($pwd, PASSWORD_DEFAULT);
-  $stmt = $pdo->prepare("INSERT INTO users (name,last_name,email,password_hash,dob,gender,created_at) VALUES (?,?,?,?,?,?,NOW())");
-  $stmt->execute([$name,$last_name,$email,$hash,date('Y-m-d', $dob_ts),$gender]);
+  $createdAt = date('Y-m-d H:i:s');
+  $stmt = $pdo->prepare("INSERT INTO users (name,last_name,email,password_hash,dob,gender,created_at) VALUES (?,?,?,?,?,?,?)");
+  $stmt->execute([$name,$last_name,$email,$hash,date('Y-m-d', $dob_ts),$gender,$createdAt]);
 
   respond([ "success"=>true, "message"=>"Conta criada com sucesso" ]);
 } catch(Exception $e){
